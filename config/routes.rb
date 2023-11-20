@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :books, only: [:index, :create]
 
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
