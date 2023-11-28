@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { login } from '../features/user/userSlice';
 import { useState, useEffect } from 'react';
 import NavBar from './NavBar';
+import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+import LoginForm from './LoginForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -12,7 +14,7 @@ function App() {
   useEffect(() => {
     fetch('/me').then((r) => {
       if (r.ok) {
-        dispatch(login(r.json()));
+        r.json().then(r => dispatch(login(r)))
       }
     });
   }, []);
@@ -26,6 +28,11 @@ function App() {
   return (
     <div className="App">
       <NavBar />
+      <Switch>
+        <Route path='/login'>
+          <LoginForm />
+        </Route>
+      </Switch>
     </div>
   );
 }
