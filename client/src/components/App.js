@@ -3,6 +3,7 @@ import './App.css';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/user/userSlice';
 import { useState, useEffect } from 'react';
+import NavBar from './NavBar';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,7 +23,11 @@ function App() {
       .then(setBooks);
   }, []);
 
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <NavBar />
+    </div>
+  );
 }
 
 export default App;
