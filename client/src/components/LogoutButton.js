@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { logout } from '../features/user/userSlice';
 
 function LogoutButton() {
   const dispatch = useDispatch();
