@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useSelector } from 'react-redux';
+import LogoutButton from './LogoutButton';
 
 function NavBar() {
   const user = useSelector((state) => state.user.data);
@@ -15,11 +16,13 @@ function NavBar() {
       {user ? (
         <div className="User-action">
           <p>Hello {user.username}</p>
-          // Logout Button
+          <LogoutButton />
         </div>
       ) : (
         <div className="User-action">
-          // Login Button
+          <button className="ui button" onClick={() => history.push('/login')}>
+            Login
+          </button>
           <button
             className="ui button"
             onClick={() => history.push('/signup')}
