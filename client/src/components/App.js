@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import LoginForm from './LoginForm';
+import SignUpForm from './SignupForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function App() {
       <Switch>
         <Route path="/login">
           <LoginForm />
+        </Route>
+        <Route path='/signup'>
+          <SignUpForm />
         </Route>
       </Switch>
     </div>
