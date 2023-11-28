@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     fetch('/me').then((r) => {
       if (r.ok) {
-        r.json().then(r => dispatch(login(r)))
+        r.json().then((r) => dispatch(login(r)));
       }
     });
   }, []);
@@ -29,7 +29,7 @@ function App() {
     <div className="App">
       <NavBar />
       <Switch>
-        <Route path='/login'>
+        <Route path="/login">
           <LoginForm />
         </Route>
       </Switch>

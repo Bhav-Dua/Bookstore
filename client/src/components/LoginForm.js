@@ -19,7 +19,7 @@ function LoginForm() {
       body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then(r => dispatch(login(r)));
+        r.json().then((r) => dispatch(login(r)));
         history.push('/');
       } else {
         r.json().then((r) => setErrors(r.errors));
