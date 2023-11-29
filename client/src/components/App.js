@@ -2,8 +2,8 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/user/userSlice';
-import { setBooks } from '../features/user/bookSlice';
-import { useState, useEffect } from 'react';
+import { setBooks } from '../features/user/booksSlice';
+import { useEffect } from 'react';
 import NavBar from './NavBar';
 import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import LoginForm from './LoginForm';
@@ -33,7 +33,7 @@ function App() {
         <Route path="/login">
           <LoginForm />
         </Route>
-        <Route path='/signup'>
+        <Route path="/signup">
           <SignUpForm />
         </Route>
       </Switch>
