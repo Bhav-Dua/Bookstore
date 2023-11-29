@@ -44,12 +44,13 @@ function Review({ id, content, rating, username, userId }) {
     const updatedBooks = useSelector((state) => state.books.inventory).map(
       (book) => {
         if (book.id === updatedReview.book_id) {
-          book.reviews = book.reviews.map((review) => {
+          const updatedReviews = book.reviews.map((review) => {
             if (review.id === updatedReview.id) {
               return updatedReview;
             }
             return review;
           });
+          return { ...book, reviews: updatedReviews };
         }
         return book;
       }
@@ -73,9 +74,10 @@ function Review({ id, content, rating, username, userId }) {
     const updatedBooks = useSelector((state) => state.books.inventory).map(
       (book) => {
         if (book.id === deletedReview.book_id) {
-          book.reviews = book.reviews.filter(
+          const updatedReviews = book.reviews.filter(
             (review) => review.id !== deletedReview.id
           );
+          return { ...book, reviews: updatedReviews };
         }
         return book;
       }
