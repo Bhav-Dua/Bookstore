@@ -19,7 +19,11 @@ function BookList() {
       />
     ));
   } else {
-    bookCards = <p style={{ marginLeft: '48%', marginTop: '10rem' }}>No books available</p>;
+    bookCards = (
+      <p style={{ marginLeft: '48%', marginTop: '10rem' }}>
+        No books available
+      </p>
+    );
   }
 
   return (
