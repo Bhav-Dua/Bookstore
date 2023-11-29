@@ -33,7 +33,7 @@ function Review({ id, content, rating, username, userId }) {
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then(saveUpdatedReview)
+        r.json().then(saveUpdatedReview);
       } else {
         r.json().then((r) => setErrors(r.errors));
       }
@@ -41,26 +41,28 @@ function Review({ id, content, rating, username, userId }) {
   }
 
   function saveUpdatedReview(updatedReview) {
-    const updatedBooks = useSelector((state) => state.books.inventory).map((book) => {
+    const updatedBooks = useSelector((state) => state.books.inventory).map(
+      (book) => {
         if (book.id === updatedReview.book_id) {
-            book.reviews = book.reviews.map((review) => {
-                if (review.id === updatedReview.id) {
-                    return updatedReview
-                }
-                return review
-            })
+          book.reviews = book.reviews.map((review) => {
+            if (review.id === updatedReview.id) {
+              return updatedReview;
+            }
+            return review;
+          });
         }
         return book;
-    })
+      }
+    );
     dispatch(setBooks(updatedBooks));
-  } 
+  }
 
   function handleDelete() {
     fetch(`/reviews/${id}`, {
       method: 'DELETE',
     }).then((r) => {
       if (r.ok) {
-        r.json().then(deleteReview)
+        r.json().then(deleteReview);
       } else {
         r.json().then((r) => setErrors(r.errors));
       }
@@ -68,19 +70,23 @@ function Review({ id, content, rating, username, userId }) {
   }
 
   function deleteReview(deletedReview) {
-    const updatedBooks = useSelector((state) => state.books.inventory).map((book) => {
+    const updatedBooks = useSelector((state) => state.books.inventory).map(
+      (book) => {
         if (book.id === deletedReview.book_id) {
-            book.reviews = book.reviews.filter((review) => review.id !== deletedReview.id)
+          book.reviews = book.reviews.filter(
+            (review) => review.id !== deletedReview.id
+          );
         }
         return book;
-    })
+      }
+    );
     dispatch(setBooks(updatedBooks));
   }
 
   return (
-    <div className='item'>
-      <div className='content'>
-        <h3 className='header'>{username}</h3>
+    <div className="item">
+      <div className="content">
+        <h3 className="header">{username}</h3>
         {isEditing ? (
           <>
             <textarea
@@ -90,7 +96,7 @@ function Review({ id, content, rating, username, userId }) {
             <div>
               Rating:{' '}
               <input
-                type='number'
+                type="number"
                 value={editedRating}
                 onChange={(e) => setEditedRating(e.target.value)}
               />
@@ -98,30 +104,30 @@ function Review({ id, content, rating, username, userId }) {
           </>
         ) : (
           <>
-            <h4 className='description'>{content}</h4>
-            <div className='rating' style={{ marginTop: '10px' }}>
+            <h4 className="description">{content}</h4>
+            <div className="rating" style={{ marginTop: '10px' }}>
               Rating: {rating}
             </div>
           </>
         )}
       </div>
       {user && user.id == userId ? (
-        <div className='ui buttons'>
+        <div className="ui buttons">
           {isEditing ? (
             <>
-              <div className='ui button' onClick={handleCancelEdit}>
+              <div className="ui button" onClick={handleCancelEdit}>
                 Cancel
               </div>
-              <div className='ui button' onClick={handleSave}>
+              <div className="ui button" onClick={handleSave}>
                 Save
               </div>
             </>
           ) : (
             <>
-              <div className='ui button' onClick={handleEdit}>
+              <div className="ui button" onClick={handleEdit}>
                 Edit
               </div>
-              <div className='ui button' onClick={handleDelete}>
+              <div className="ui button" onClick={handleDelete}>
                 Delete
               </div>
             </>
