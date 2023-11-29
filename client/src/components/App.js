@@ -2,7 +2,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/user/userSlice';
-import { setBooks } from '../features/user/booksSlice';
+import { setBooks } from '../features/books/booksSlice';
 import { useEffect } from 'react';
 import NavBar from './NavBar';
 import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
