@@ -7,15 +7,20 @@ function BookList() {
   const user = useSelector((state) => state.user.data);
   const books = useSelector((state) => state.books.data);
   const history = useHistory();
+  let bookCards;
 
-  const bookCards = books.map((book) => (
-    <BookCard
-      id={book.id}
-      title={book.title}
-      author={book.author}
-      img={book.img}
-    />
-  ));
+  if (books && books.length > 0) {
+    bookCards = books.map((book) => (
+      <BookCard
+        id={book.id}
+        title={book.title}
+        author={book.author}
+        img={book.img}
+      />
+    ));
+  } else {
+    bookCards = <p style={{ marginLeft: '48%', marginTop: '10rem' }}>No books available</p>;
+  }
 
   return (
     <div className="BookList">
@@ -37,9 +42,7 @@ function BookList() {
       ) : (
         <></>
       )}
-      <div className="ui cards">
-        {bookCards}
-      </div>
+      <div className="ui cards">{bookCards}</div>
     </div>
   );
 }

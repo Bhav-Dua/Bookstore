@@ -8,6 +8,7 @@ import NavBar from './NavBar';
 import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignupForm';
+import BookList from './BookList';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path='/signup'>
           <SignUpForm />
+        </Route>
+        <Route exact path='/'>
+          <BookList />
         </Route>
       </Switch>
     </div>
