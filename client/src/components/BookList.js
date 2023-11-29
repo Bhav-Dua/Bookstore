@@ -8,17 +8,17 @@ function BookList() {
   const history = useHistory();
 
   return (
-    <div className="BookList">
+    <div className='BookList'>
       {user ? (
-        <div className="ui buttons" style={{ marginBottom: '3rem' }}>
+        <div className='ui buttons' style={{ marginBottom: '3rem' }}>
           <button
-            className="ui button"
+            className='ui button'
             onClick={() => history.push('/myBooks')}
           >
             My Books
           </button>
           <button
-            className="ui button"
+            className='ui button'
             onClick={() => history.push('/myReviews')}
           >
             My Reviews
@@ -27,7 +27,7 @@ function BookList() {
       ) : (
         <></>
       )}
-      <div className="ui cards"></div>
+      <div className='ui cards'></div>
     </div>
   );
 }

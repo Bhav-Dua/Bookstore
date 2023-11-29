@@ -27,13 +27,13 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className='App'>
       <NavBar />
       <Switch>
-        <Route path="/login">
+        <Route path='/login'>
           <LoginForm />
         </Route>
-        <Route path="/signup">
+        <Route path='/signup'>
           <SignUpForm />
         </Route>
       </Switch>

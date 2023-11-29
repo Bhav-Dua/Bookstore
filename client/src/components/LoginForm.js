@@ -36,23 +36,23 @@ function LoginForm() {
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <div className="field">
-        <label htmlFor="username">Username </label>
+    <form className='form' onSubmit={handleSubmit}>
+      <div className='field'>
+        <label htmlFor='username'>Username </label>
         <input
-          type="text"
-          id="username"
-          name="username"
+          type='text'
+          id='username'
+          name='username'
           value={formData.username}
           onChange={handleFormData}
         />
       </div>
-      <div className="field">
-        <label htmlFor="password">Password </label>
+      <div className='field'>
+        <label htmlFor='password'>Password </label>
         <input
-          type="password"
-          id="password"
-          name="password"
+          type='password'
+          id='password'
+          name='password'
           value={formData.password}
           onChange={handleFormData}
         />
@@ -60,7 +60,7 @@ function LoginForm() {
       {errors.map((error) => (
         <p>{error}</p>
       ))}
-      <button className="Submit-button" type="submit">
+      <button className='Submit-button' type='submit'>
         Submit
       </button>
     </form>

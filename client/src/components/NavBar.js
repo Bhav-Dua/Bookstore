@@ -9,22 +9,22 @@ function NavBar() {
   const history = useHistory();
 
   return (
-    <div className="Navbar">
-      <h1 className="Nav-logo">
-        <Link to="/">Books</Link>
+    <div className='Navbar'>
+      <h1 className='Nav-logo'>
+        <Link to='/'>Books</Link>
       </h1>
       {user ? (
-        <div className="User-action">
+        <div className='User-action'>
           <p>Hello {user.username}</p>
           <LogoutButton />
         </div>
       ) : (
-        <div className="User-action">
-          <button className="ui button" onClick={() => history.push('/login')}>
+        <div className='User-action'>
+          <button className='ui button' onClick={() => history.push('/login')}>
             Login
           </button>
           <button
-            className="ui button"
+            className='ui button'
             onClick={() => history.push('/signup')}
             style={{ marginLeft: '10px' }}
           >
