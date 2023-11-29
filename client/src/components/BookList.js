@@ -1,24 +1,34 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import BookCard from './BookCard';
 
 function BookList() {
   const user = useSelector((state) => state.user.data);
   const books = useSelector((state) => state.books.data);
   const history = useHistory();
 
+  const bookCards = books.map((book) => (
+    <BookCard
+      id={book.id}
+      title={book.title}
+      author={book.author}
+      img={book.img}
+    />
+  ));
+
   return (
-    <div className='BookList'>
+    <div className="BookList">
       {user ? (
-        <div className='ui buttons' style={{ marginBottom: '3rem' }}>
+        <div className="ui buttons" style={{ marginBottom: '3rem' }}>
           <button
-            className='ui button'
+            className="ui button"
             onClick={() => history.push('/myBooks')}
           >
             My Books
           </button>
           <button
-            className='ui button'
+            className="ui button"
             onClick={() => history.push('/myReviews')}
           >
             My Reviews
@@ -27,7 +37,9 @@ function BookList() {
       ) : (
         <></>
       )}
-      <div className='ui cards'></div>
+      <div className="ui cards">
+        {bookCards}
+      </div>
     </div>
   );
 }
