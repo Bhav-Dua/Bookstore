@@ -5,7 +5,7 @@ import BookCard from './BookCard';
 
 function BookList() {
   const user = useSelector((state) => state.user.data);
-  const books = useSelector((state) => state.books.data);
+  const books = useSelector((state) => state.books.inventory);
   const history = useHistory();
   let bookCards;
 
