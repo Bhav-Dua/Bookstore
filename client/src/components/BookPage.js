@@ -80,9 +80,9 @@ function BookPage() {
   }
 
   return (
-    <div className="ui placeholder segment">
-      <div class="ui two column very relaxed stackable grid">
-        <div className="column">
+    <div className='ui placeholder segment'>
+      <div class='ui two column very relaxed stackable grid'>
+        <div className='column'>
           {isAdding ? (
             <>
               <form onSubmit={handleSubmit}>
@@ -90,21 +90,21 @@ function BookPage() {
                   <textarea
                     value={reviewContent}
                     onChange={(e) => setReviewContent(e.target.value)}
-                    placeholder="Write your review..."
+                    placeholder='Write your review...'
                   />
-                  <label htmlFor="rating">Rating: </label>
+                  <label htmlFor='rating'>Rating: </label>
                   <input
-                    type="number"
+                    type='number'
                     value={reviewRating}
                     onChange={(e) => setReviewRating(Number(e.target.value))}
                     style={{ width: '100px' }}
                   />
                 </div>
-                <div className="ui buttons">
-                  <button className="ui button" onClick={handleCancelAdd}>
+                <div className='ui buttons'>
+                  <button className='ui button' onClick={handleCancelAdd}>
                     Cancel
                   </button>
-                  <button className="ui button" type="submit">
+                  <button className='ui button' type='submit'>
                     Submit Review
                   </button>
                 </div>
@@ -115,7 +115,7 @@ function BookPage() {
             </>
           ) : (
             <>
-              <div className="ui vertical menu">{reviews}</div>
+              <div className='ui vertical menu'>{reviews}</div>
               <div
                 style={{
                   position: 'fixed',
@@ -125,28 +125,28 @@ function BookPage() {
                 }}
               >
                 {user ? (
-                  <button className="ui button" onClick={handleAddReview}>
+                  <button className='ui button' onClick={handleAddReview}>
                     Add Review
                   </button>
                 ) : (
                   <div
-                    className="ui animated fade button"
-                    tabIndex="0"
+                    className='ui animated fade button'
+                    tabIndex='0'
                     onClick={() => history.push('/login')}
                   >
-                    <div className="visible content">Add Review</div>
-                    <div className="hidden content">Sign in</div>
+                    <div className='visible content'>Add Review</div>
+                    <div className='hidden content'>Sign in</div>
                   </div>
                 )}
               </div>
             </>
           )}
         </div>
-        <div className="middle aligned column">
+        <div className='middle aligned column'>
           {/* <img src={} alt={} /> */}
         </div>
       </div>
-      <div className="ui vertical divider"></div>
+      <div className='ui vertical divider'></div>
     </div>
   );
 }
