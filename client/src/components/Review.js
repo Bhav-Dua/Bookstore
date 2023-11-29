@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBooks } from '../features/books/booksSlice';
 
 function Review({ id, content, rating, username, userId }) {
   const user = useSelector((state) => state.user.data);
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
   const [editedRating, setEditedRating] = useState(rating);
@@ -31,23 +33,48 @@ function Review({ id, content, rating, username, userId }) {
       }),
     }).then((r) => {
       if (r.ok) {
-        // update state through redux
+        r.json().then(saveUpdatedReview)
       } else {
         r.json().then((r) => setErrors(r.errors));
       }
     });
   }
 
+  function saveUpdatedReview(updatedReview) {
+    const updatedBooks = useSelector((state) => state.books.inventory).map((book) => {
+        if (book.id === updatedReview.book_id) {
+            book.reviews = book.reviews.map((review) => {
+                if (review.id === updatedReview.id) {
+                    return updatedReview
+                }
+                return review
+            })
+        }
+        return book;
+    })
+    dispatch(setBooks(updatedBooks));
+  } 
+
   function handleDelete() {
     fetch(`/reviews/${id}`, {
       method: 'DELETE',
     }).then((r) => {
       if (r.ok) {
-        // update state through redux
+        r.json().then(deleteReview)
       } else {
         r.json().then((r) => setErrors(r.errors));
       }
     });
+  }
+
+  function deleteReview(deletedReview) {
+    const updatedBooks = useSelector((state) => state.books.inventory).map((book) => {
+        if (book.id === deletedReview.book_id) {
+            book.reviews = book.reviews.filter((review) => review.id !== deletedReview.id)
+        }
+        return book;
+    })
+    dispatch(setBooks(updatedBooks));
   }
 
   return (
