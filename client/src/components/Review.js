@@ -51,9 +51,9 @@ function Review({ id, content, rating, username, userId }) {
   }
 
   return (
-    <div className="item">
-      <div className="content">
-        <h3 className="header">{username}</h3>
+    <div className='item'>
+      <div className='content'>
+        <h3 className='header'>{username}</h3>
         {isEditing ? (
           <>
             <textarea
@@ -63,7 +63,7 @@ function Review({ id, content, rating, username, userId }) {
             <div>
               Rating:{' '}
               <input
-                type="number"
+                type='number'
                 value={editedRating}
                 onChange={(e) => setEditedRating(e.target.value)}
               />
@@ -71,30 +71,30 @@ function Review({ id, content, rating, username, userId }) {
           </>
         ) : (
           <>
-            <h4 className="description">{content}</h4>
-            <div className="rating" style={{ marginTop: '10px' }}>
+            <h4 className='description'>{content}</h4>
+            <div className='rating' style={{ marginTop: '10px' }}>
               Rating: {rating}
             </div>
           </>
         )}
       </div>
       {user && user.id == userId ? (
-        <div className="ui buttons">
+        <div className='ui buttons'>
           {isEditing ? (
             <>
-              <div className="ui button" onClick={handleCancelEdit}>
+              <div className='ui button' onClick={handleCancelEdit}>
                 Cancel
               </div>
-              <div className="ui button" onClick={handleSave}>
+              <div className='ui button' onClick={handleSave}>
                 Save
               </div>
             </>
           ) : (
             <>
-              <div className="ui button" onClick={handleEdit}>
+              <div className='ui button' onClick={handleEdit}>
                 Edit
               </div>
-              <div className="ui button" onClick={handleDelete}>
+              <div className='ui button' onClick={handleDelete}>
                 Delete
               </div>
             </>
