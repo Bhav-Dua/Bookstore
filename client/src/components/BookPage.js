@@ -1,11 +1,22 @@
 import React from 'react';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useSelector } from 'react-redux';
+import Review from './Review';
 
 function BookPage() {
     const { id } = useParams();
     const user = useSelector((state) => state.user.data);
     const book = useSelector((state) => state.books.inventory).find((book) => book.id === parseInt(id, 10));
+
+    const reviews = book.reviews.map((review) => (
+        <Review
+            id={review.id}
+            content={review.content}
+            rating={review.rating}
+            username={review.username}
+            userId={review.user_id}
+            />
+    ))
 
     function handleAddReview() {
 
