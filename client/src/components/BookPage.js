@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import {
-  useHistory,
-  useParams,
-} from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useDispatch, useSelector } from 'react-redux';
 import Review from './Review';
 import { setBooks } from '../features/books/booksSlice';
@@ -16,9 +13,18 @@ function BookPage() {
     book => book.id === parseInt(id, 10)
   );
   const [isAdding, setisAdding] = useState(false);
+  const [isOwned, setisOwned] = useState(false);
   const [reviewContent, setReviewContent] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    if (user && user.books.some(userBook => userBook.id === book.id)) {
+      setisOwned(true);
+    } else {
+      setisOwned(false);
+    }
+  }, [user, book]);
 
   const reviews = book.reviews.map(review => (
     <Review
@@ -61,14 +67,12 @@ function BookPage() {
   }
 
   function addReview(newReview) {
-    const updatedBooks = useSelector(state => state.books.inventory).map(
-      book => {
-        if (book.id === newReview.book_id) {
-          book.reviews = [...book.reviews, newReview];
-        }
-        return book;
+    const updatedBooks = useSelector(state => state.books.inventory).map(book => {
+      if (book.id === newReview.book_id) {
+        book.reviews = [...book.reviews, newReview];
       }
-    );
+      return book;
+    });
     dispatch(setBooks(updatedBooks));
   }
 
@@ -81,7 +85,7 @@ function BookPage() {
 
   return (
     <div className='ui placeholder segment'>
-      <div class='ui two column very relaxed stackable grid'>
+      <div className='ui two column very relaxed stackable grid'>
         <div className='column'>
           {isAdding ? (
             <>
@@ -150,6 +154,25 @@ function BookPage() {
           <h3>Published in {book.published_year}</h3>
           <h4>Genre: {book.genre}</h4>
           <p className='description'>{book.description}</p>
+          {isOwned ? (
+            <button className='ui disabled button'>Already Owned</button>
+          ) : (
+          <></>
+          )}
+          {user && !isOwned ? (
+            <button className='ui button' onClick={handleOrder}>
+              Order Book
+            </button>
+          ) : (
+            <div
+              className='ui animated fade button'
+              tabIndex='0'
+              onClick={() => history.push('/login')}
+            >
+              <div className='visible content'>Order Book</div>
+              <div className='hidden content'>Sign in</div>
+            </div>
+          )}
         </div>
       </div>
       <div className='ui vertical divider'></div>
