@@ -15,7 +15,7 @@ function MyBooks() {
       }
 
     return (
-        <div className="ui cards">{bookCards}</div>
+        <div className="ui cards" style={{ marginTop: '3vh' }}>{bookCards}</div>
       );
 
 }

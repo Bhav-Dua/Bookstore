@@ -18,7 +18,7 @@ function BookList() {
   }
 
   return (
-    <div className='BookList'>
+    <div className='BookList' style={{ marginTop: '1vh' }}>
       {user ? (
         <div className='ui buttons' style={{ marginBottom: '3rem' }}>
           <button className='ui button' onClick={() => history.push('/myBooks')}>
@@ -31,7 +31,7 @@ function BookList() {
       ) : (
         <></>
       )}
-      <div className='ui cards'>{bookCards}</div>
+      <div className='ui cards' style={{ marginTop: '2vh' }}>{bookCards}</div>
     </div>
   );
 }
