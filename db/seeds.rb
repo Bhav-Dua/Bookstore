@@ -46,8 +46,126 @@ books_data = [
   }
 ]
 
+users_data = [
+  {
+    username: "Mike",
+    password: "123",
+    password_confirmation: "123",
+  },
+  {
+    username: "Tyler",
+    password: "123",
+    password_confirmation: "123",
+  },
+  {
+    username: "John",
+    password: "123",
+    password_confirmation: "123",
+  },
+  {
+    username: "Kronos",
+    password: "123",
+    password_confirmation: "123",
+  }
+]
+
 books_data.each do |book_data|
   Book.create(book_data)
 end
 
+users_data.each do |user_data|
+  User.create(user_data)
+end
+
 puts "Seeding completed! Books created."
+
+def find_user(username)
+  User.find_by(username: username)
+end
+
+def find_book(title)
+  Book.find_by(title: title)
+end
+
+mike = find_user("Mike")
+tyler = find_user("Tyler")
+john = find_user("John")
+kronos = find_user("Kronos")
+
+book1 = find_book("To Kill a Mockingbird")
+book2 = find_book("1984")
+
+Review.create!(
+  user: mike,
+  book: book1,
+  content: "Engaging and thought-provoking!",
+  rating: 4
+)
+
+Review.create!(
+  user: mike,
+  book: book2,
+  content: "A classic that resonates with the current world.",
+  rating: 5
+)
+
+book2 = find_book("1984")
+book3 = find_book("The Great Gatsby")
+
+Review.create!(
+  user: tyler,
+  book: book2,
+  content: "A chilling portrayal of a surveillance society.",
+  rating: 4
+)
+
+Review.create!(
+  user: tyler,
+  book: book3,
+  content: "An intriguing glimpse into the 1920s lifestyle.",
+  rating: 4
+)
+
+book1 = find_book("To Kill a Mockingbird")
+book4 = find_book("Pride and Prejudice")
+
+Review.create!(
+  user: john,
+  book: book1,
+  content: "A masterpiece that addresses important societal issues.",
+  rating: 5
+)
+
+Review.create!(
+  user: john,
+  book: book4,
+  content: "A classic romance with timeless themes.",
+  rating: 4
+)
+
+book3 = find_book("The Great Gatsby")
+book4 = find_book("Pride and Prejudice")
+book5 = find_book("The Catcher in the Rye")
+
+Review.create!(
+  user: kronos,
+  book: book3,
+  content: "A captivating portrayal of the Jazz Age.",
+  rating: 5
+)
+
+Review.create!(
+  user: kronos,
+  book: book4,
+  content: "An interesting exploration of societal norms.",
+  rating: 3
+)
+
+Review.create!(
+  user: kronos,
+  book: book5,
+  content: "A compelling coming-of-age story.",
+  rating: 4
+)
+
+puts "Seeding completed! Reviews created."
