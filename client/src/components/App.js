@@ -10,6 +10,7 @@ import LoginForm from './LoginForm';
 import SignUpForm from './SignupForm';
 import BookList from './BookList';
 import BookPage from './BookPage';
+import MyBooks from './MyBooks';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route path='/books/:id'>
           <BookPage />
+        </Route>
+        <Route path='/myBooks'>
+          <MyBooks />
         </Route>
         <Route exact path='/'>
           <BookList />
