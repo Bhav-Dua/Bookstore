@@ -21,12 +21,12 @@ function SignUpForm() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
-    }).then((r) => {
+    }).then(r => {
       if (r.ok) {
-        r.json().then((r) => dispatch(login(r)));
+        r.json().then(r => dispatch(login(r)));
         history.push('/');
       } else {
-        r.json().then((r) => setErrors(r.errors));
+        r.json().then(r => setErrors(r.errors));
         setFormData({ username: '', password: '', password_confirmation: '' });
       }
     });
@@ -71,7 +71,7 @@ function SignUpForm() {
           onChange={handleFormData}
         />
       </div>
-      {errors.map((error) => (
+      {errors.map(error => (
         <p>{error}</p>
       ))}
       <button className='Submit-button' type='submit'>

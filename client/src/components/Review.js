@@ -43,20 +43,18 @@ function Review({ id, content, rating, username, userId, bookId }) {
   }
 
   function saveUpdatedReview(updatedReview) {
-    const updatedBooks = inventory.map(
-      book => {
-        if (book.id === updatedReview.book_id) {
-          const updatedReviews = book.reviews.map(review => {
-            if (review.id === updatedReview.id) {
-              return updatedReview;
-            }
-            return review;
-          });
-          return { ...book, reviews: updatedReviews };
-        }
-        return book;
+    const updatedBooks = inventory.map(book => {
+      if (book.id === updatedReview.book_id) {
+        const updatedReviews = book.reviews.map(review => {
+          if (review.id === updatedReview.id) {
+            return updatedReview;
+          }
+          return review;
+        });
+        return { ...book, reviews: updatedReviews };
       }
-    );
+      return book;
+    });
     dispatch(setBooks(updatedBooks));
   }
 
@@ -73,17 +71,13 @@ function Review({ id, content, rating, username, userId, bookId }) {
   }
 
   function deleteReview() {
-    const updatedBooks = inventory.map(
-      book => {
-        if (book.id === bookId) {
-          const updatedReviews = book.reviews.filter(
-            review => review.id !== id
-          );
-          return { ...book, reviews: updatedReviews };
-        }
-        return book;
+    const updatedBooks = inventory.map(book => {
+      if (book.id === bookId) {
+        const updatedReviews = book.reviews.filter(review => review.id !== id);
+        return { ...book, reviews: updatedReviews };
       }
-    );
+      return book;
+    });
     dispatch(setBooks(updatedBooks));
   }
 
@@ -93,10 +87,7 @@ function Review({ id, content, rating, username, userId, bookId }) {
         <h3 className='header'>{username}</h3>
         {isEditing ? (
           <>
-            <textarea
-              value={editedContent}
-              onChange={e => setEditedContent(e.target.value)}
-            />
+            <textarea value={editedContent} onChange={e => setEditedContent(e.target.value)} />
             <div>
               Rating:{' '}
               <input

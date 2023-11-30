@@ -11,35 +11,20 @@ function BookList() {
 
   if (books && books.length > 0) {
     bookCards = books.map(book => (
-      <BookCard
-        id={book.id}
-        title={book.title}
-        author={book.author}
-        img={book.img}
-      />
+      <BookCard id={book.id} title={book.title} author={book.author} img={book.img} />
     ));
   } else {
-    bookCards = (
-      <p style={{ marginLeft: '48%', marginTop: '10rem' }}>
-        No books available
-      </p>
-    );
+    bookCards = <p style={{ marginLeft: '48%', marginTop: '10rem' }}>No books available</p>;
   }
 
   return (
     <div className='BookList'>
       {user ? (
         <div className='ui buttons' style={{ marginBottom: '3rem' }}>
-          <button
-            className='ui button'
-            onClick={() => history.push('/myBooks')}
-          >
+          <button className='ui button' onClick={() => history.push('/myBooks')}>
             My Books
           </button>
-          <button
-            className='ui button'
-            onClick={() => history.push('/myReviews')}
-          >
+          <button className='ui button' onClick={() => history.push('/myReviews')}>
             My Reviews
           </button>
         </div>

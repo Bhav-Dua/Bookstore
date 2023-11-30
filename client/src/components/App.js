@@ -15,17 +15,17 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch('/me').then((r) => {
+    fetch('/me').then(r => {
       if (r.ok) {
-        r.json().then((r) => dispatch(login(r)));
+        r.json().then(r => dispatch(login(r)));
       }
     });
   }, []);
 
   useEffect(() => {
     fetch('/books')
-      .then((r) => r.json())
-      .then((r) => dispatch(setBooks(r)));
+      .then(r => r.json())
+      .then(r => dispatch(setBooks(r)));
   }, []);
 
   return (

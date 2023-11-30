@@ -6,7 +6,7 @@ function LogoutButton() {
   const dispatch = useDispatch();
 
   function handleLogout() {
-    fetch('/logout', { method: 'DELETE' }).then((r) => {
+    fetch('/logout', { method: 'DELETE' }).then(r => {
       if (r.ok) {
         dispatch(logout());
       }
