@@ -23,7 +23,6 @@ function LoginForm() {
         history.push('/');
       } else {
         r.json().then(r => setErrors(r.errors));
-        setFormData({ username: '', password: '' });
       }
     });
   }
