@@ -66,6 +66,8 @@ function BookPage() {
       if (r.ok) {
         r.json().then(addReview);
         setisAdding(false);
+        setReviewContent('');
+        setReviewRating(0);
       } else {
         r.json().then(r => setErrors(r.errors));
       }
@@ -109,6 +111,8 @@ function BookPage() {
                     value={reviewRating}
                     onChange={e => setReviewRating(Number(e.target.value))}
                     style={{ width: '100px' }}
+                    min={1}
+                    max={5}
                   />
                 </div>
                 <div className='ui buttons'>
