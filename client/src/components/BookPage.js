@@ -23,7 +23,7 @@ function BookPage() {
 
   useEffect(() => {
     if (book && user && user.books.some(userBook => userBook.id === book.id)) {
-      console.log("owned")
+      console.log('owned');
       setisOwned(true);
     } else {
       setisOwned(false);
@@ -166,20 +166,29 @@ function BookPage() {
                   transform: 'translateX(-50%)',
                 }}
               >
-                {user ? (
-                  <button className='ui button' onClick={handleAddReview}>
-                    Add Review
-                  </button>
-                ) : (
-                  <div
-                    className='ui animated fade button'
-                    tabIndex='0'
-                    onClick={() => history.push('/login')}
-                  >
-                    <div className='visible content'>Add Review</div>
-                    <div className='hidden content'>Sign in</div>
-                  </div>
-                )}
+                <div
+                  style={{
+                    position: 'fixed',
+                    bottom: '1rem',
+                    right: '1rem',
+                    zIndex: '9999',
+                  }}
+                >
+                  {user ? (
+                    <button className='ui button' onClick={handleAddReview}>
+                      Add Review
+                    </button>
+                  ) : (
+                    <div
+                      className='ui animated fade button'
+                      tabIndex='0'
+                      onClick={() => history.push('/login')}
+                    >
+                      <div className='visible content'>Add Review</div>
+                      <div className='hidden content'>Sign in</div>
+                    </div>
+                  )}
+                </div>
               </div>
             </>
           )}
