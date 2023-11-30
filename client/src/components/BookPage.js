@@ -170,7 +170,7 @@ function BookPage() {
                   style={{
                     position: 'fixed',
                     bottom: '1rem',
-                    right: '1rem',
+                    right: '50vh',
                     zIndex: '9999',
                   }}
                 >
@@ -201,22 +201,29 @@ function BookPage() {
           <h3>Published in {book.published_year}</h3>
           <h4>Genre: {book.genre}</h4>
           <p className='description'>{book.description}</p>
-          {isOwned ? (
-            <button className='ui disabled button'>Already Owned</button>
-          ) : user ? (
-            <button className='ui button' onClick={handleOrder}>
-              Order Book
-            </button>
-          ) : (
-            <div
-              className='ui animated fade button'
-              tabIndex='0'
-              onClick={() => history.push('/login')}
-            >
-              <div className='visible content'>Order Book</div>
-              <div className='hidden content'>Sign in</div>
-            </div>
-          )}
+          <div style={{
+                    position: 'fixed',
+                    bottom: '1rem',
+                    right: '44vh',
+                    zIndex: '9999',
+                  }}>
+            {isOwned ? (
+              <button className='ui disabled button'>Already Owned</button>
+            ) : user ? (
+              <button className='ui button' onClick={handleOrder}>
+                Order Book
+              </button>
+            ) : (
+              <div
+                className='ui animated fade button'
+                tabIndex='0'
+                onClick={() => history.push('/login')}
+              >
+                <div className='visible content'>Order Book</div>
+                <div className='hidden content'>Sign in</div>
+              </div>
+            )}
+          </div>
           {orderErrors.map(error => (
             <p>{error}</p>
           ))}

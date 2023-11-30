@@ -37,26 +37,38 @@
   }
 }
 
-.NavBar{
-  padding-bottom: 4rem;
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
 }
 
 .Nav-logo {
-  font-family: "Permanent Marker", cursive;
-  font-size: 4rem;
-  margin: 0;
-  line-height: 1;
+  flex: 1;
+  display: flex;
 }
 
 .Nav-logo a {
-  color: rgb(255, 0, 0);
+  text-decoration: none;
+  color: #fff;
+  font-size: 24px;
 }
 
 .User-action {
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.User-action p {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.ui.button:hover {
+  background-color: #f0f0f0;
 }
 
 .form {
@@ -109,8 +121,11 @@ input {
   margin-left: auto;
 }
 
+.middle.aligned.column {
+  height: 100vh;
+}
+
 .middle.aligned.column img {
-  margin-bottom: 10rem;
-  width: 50%;
+  width: 35%;
   height: 50%;
 }
