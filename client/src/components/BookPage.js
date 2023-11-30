@@ -18,6 +18,8 @@ function BookPage() {
   const [reviewRating, setReviewRating] = useState(0);
   const [errors, setErrors] = useState([]);
 
+  if (!book) return <p>No Book to be found</p>
+
   useEffect(() => {
     if (user && user.books.some(userBook => userBook.id === book.id)) {
       setisOwned(true);
@@ -82,6 +84,7 @@ function BookPage() {
     setReviewContent('');
     setReviewRating(0);
   }
+
 
   return (
     <div className='ui placeholder segment'>
