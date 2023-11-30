@@ -21,6 +21,9 @@ function BookList() {
     <div className='BookList' style={{ marginTop: '1vh' }}>
       {user ? (
         <div className='ui buttons' style={{ marginBottom: '3rem' }}>
+          <button className='ui button' onClick={() => history.push('/newBook')}>
+            Add Book
+          </button>
           <button className='ui button' onClick={() => history.push('/myBooks')}>
             My Books
           </button>
@@ -31,7 +34,9 @@ function BookList() {
       ) : (
         <></>
       )}
-      <div className='ui cards' style={{ marginTop: '2vh' }}>{bookCards}</div>
+      <div className='ui cards' style={{ marginTop: '2vh' }}>
+        {bookCards}
+      </div>
     </div>
   );
 }
