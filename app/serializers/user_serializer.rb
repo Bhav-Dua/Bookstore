@@ -3,5 +3,5 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :orders
   has_many :books
-  has_many :reviewed_books
+  has_many :reviews
 end
