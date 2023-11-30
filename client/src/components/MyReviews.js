@@ -16,6 +16,7 @@ function MyReviews() {
       </div>
     ));
   }
+  else reviews = <p>You have not posted any reviews</p>
 
   return (
     <div className='ui very relaxed list' style={{ marginTop: '10rem' }}>
