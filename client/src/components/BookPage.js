@@ -11,16 +11,16 @@ function BookPage() {
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.data);
-  const book = useSelector((state) => state.books.inventory).find(
-    (book) => book.id === parseInt(id, 10)
+  const user = useSelector(state => state.user.data);
+  const book = useSelector(state => state.books.inventory).find(
+    book => book.id === parseInt(id, 10)
   );
   const [isAdding, setisAdding] = useState(false);
   const [reviewContent, setReviewContent] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
   const [errors, setErrors] = useState([]);
 
-  const reviews = book.reviews.map((review) => (
+  const reviews = book.reviews.map(review => (
     <Review
       id={review.id}
       content={review.content}
@@ -50,19 +50,19 @@ function BookPage() {
         rating: reviewRating,
         book_id: id,
       }),
-    }).then((r) => {
+    }).then(r => {
       if (r.ok) {
         r.json().then(addReview);
         setisAdding(false);
       } else {
-        r.json().then((r) => setErrors(r.errors));
+        r.json().then(r => setErrors(r.errors));
       }
     });
   }
 
   function addReview(newReview) {
-    const updatedBooks = useSelector((state) => state.books.inventory).map(
-      (book) => {
+    const updatedBooks = useSelector(state => state.books.inventory).map(
+      book => {
         if (book.id === newReview.book_id) {
           book.reviews = [...book.reviews, newReview];
         }
@@ -89,14 +89,14 @@ function BookPage() {
                 <div>
                   <textarea
                     value={reviewContent}
-                    onChange={(e) => setReviewContent(e.target.value)}
+                    onChange={e => setReviewContent(e.target.value)}
                     placeholder='Write your review...'
                   />
                   <label htmlFor='rating'>Rating: </label>
                   <input
                     type='number'
                     value={reviewRating}
-                    onChange={(e) => setReviewRating(Number(e.target.value))}
+                    onChange={e => setReviewRating(Number(e.target.value))}
                     style={{ width: '100px' }}
                   />
                 </div>
@@ -109,7 +109,7 @@ function BookPage() {
                   </button>
                 </div>
               </form>
-              {errors.map((error) => (
+              {errors.map(error => (
                 <p>{error}</p>
               ))}
             </>
@@ -143,7 +143,13 @@ function BookPage() {
           )}
         </div>
         <div className='middle aligned column'>
-          {/* <img src={} alt={} /> */}
+          <div className='meta'>ISBN: {book.isbn}</div>
+          <img src={book.img} alt={book.title} />
+          <h1>{book.title}</h1>
+          <h2>By: {book.author}</h2>
+          <h3>Published in {book.published_year}</h3>
+          <h4>Genre: {book.genre}</h4>
+          <p className='description'>{book.description}</p>
         </div>
       </div>
       <div className='ui vertical divider'></div>

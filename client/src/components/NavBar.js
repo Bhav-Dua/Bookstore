@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import LogoutButton from './LogoutButton';
 
 function NavBar() {
-  const user = useSelector((state) => state.user.data);
+  const user = useSelector(state => state.user.data);
   const history = useHistory();
 
   return (

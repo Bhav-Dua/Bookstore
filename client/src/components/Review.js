@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setBooks } from '../features/books/booksSlice';
 
 function Review({ id, content, rating, username, userId }) {
-  const user = useSelector((state) => state.user.data);
+  const user = useSelector(state => state.user.data);
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
@@ -31,20 +31,20 @@ function Review({ id, content, rating, username, userId }) {
         content: editedContent,
         rating: editedRating,
       }),
-    }).then((r) => {
+    }).then(r => {
       if (r.ok) {
         r.json().then(saveUpdatedReview);
       } else {
-        r.json().then((r) => setErrors(r.errors));
+        r.json().then(r => setErrors(r.errors));
       }
     });
   }
 
   function saveUpdatedReview(updatedReview) {
-    const updatedBooks = useSelector((state) => state.books.inventory).map(
-      (book) => {
+    const updatedBooks = useSelector(state => state.books.inventory).map(
+      book => {
         if (book.id === updatedReview.book_id) {
-          const updatedReviews = book.reviews.map((review) => {
+          const updatedReviews = book.reviews.map(review => {
             if (review.id === updatedReview.id) {
               return updatedReview;
             }
@@ -61,21 +61,21 @@ function Review({ id, content, rating, username, userId }) {
   function handleDelete() {
     fetch(`/reviews/${id}`, {
       method: 'DELETE',
-    }).then((r) => {
+    }).then(r => {
       if (r.ok) {
         r.json().then(deleteReview);
       } else {
-        r.json().then((r) => setErrors(r.errors));
+        r.json().then(r => setErrors(r.errors));
       }
     });
   }
 
   function deleteReview(deletedReview) {
-    const updatedBooks = useSelector((state) => state.books.inventory).map(
-      (book) => {
+    const updatedBooks = useSelector(state => state.books.inventory).map(
+      book => {
         if (book.id === deletedReview.book_id) {
           const updatedReviews = book.reviews.filter(
-            (review) => review.id !== deletedReview.id
+            review => review.id !== deletedReview.id
           );
           return { ...book, reviews: updatedReviews };
         }
@@ -86,50 +86,50 @@ function Review({ id, content, rating, username, userId }) {
   }
 
   return (
-    <div className="item">
-      <div className="content">
-        <h3 className="header">{username}</h3>
+    <div className='item'>
+      <div className='content'>
+        <h3 className='header'>{username}</h3>
         {isEditing ? (
           <>
             <textarea
               value={editedContent}
-              onChange={(e) => setEditedContent(e.target.value)}
+              onChange={e => setEditedContent(e.target.value)}
             />
             <div>
               Rating:{' '}
               <input
-                type="number"
+                type='number'
                 value={editedRating}
-                onChange={(e) => setEditedRating(e.target.value)}
+                onChange={e => setEditedRating(e.target.value)}
               />
             </div>
           </>
         ) : (
           <>
-            <h4 className="description">{content}</h4>
-            <div className="rating" style={{ marginTop: '10px' }}>
+            <h4 className='description'>{content}</h4>
+            <div className='rating' style={{ marginTop: '10px' }}>
               Rating: {rating}
             </div>
           </>
         )}
       </div>
       {user && user.id == userId ? (
-        <div className="ui buttons">
+        <div className='ui buttons'>
           {isEditing ? (
             <>
-              <div className="ui button" onClick={handleCancelEdit}>
+              <div className='ui button' onClick={handleCancelEdit}>
                 Cancel
               </div>
-              <div className="ui button" onClick={handleSave}>
+              <div className='ui button' onClick={handleSave}>
                 Save
               </div>
             </>
           ) : (
             <>
-              <div className="ui button" onClick={handleEdit}>
+              <div className='ui button' onClick={handleEdit}>
                 Edit
               </div>
-              <div className="ui button" onClick={handleDelete}>
+              <div className='ui button' onClick={handleDelete}>
                 Delete
               </div>
             </>
@@ -138,7 +138,7 @@ function Review({ id, content, rating, username, userId }) {
       ) : (
         <></>
       )}
-      {errors.map((error) => (
+      {errors.map(error => (
         <p>{error}</p>
       ))}
     </div>
