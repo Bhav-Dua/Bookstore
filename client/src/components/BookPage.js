@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min
 import { useDispatch, useSelector } from 'react-redux';
 import Review from './Review';
 import { setBooks } from '../features/books/booksSlice';
+import { login } from '../features/user/userSlice';
 
 function BookPage() {
   const { id } = useParams();
@@ -18,9 +19,11 @@ function BookPage() {
   const [reviewContent, setReviewContent] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
   const [errors, setErrors] = useState([]);
+  const [orderErrors, setOrderErrors] = useState([]);
 
   useEffect(() => {
-    if (user && user.books.some(userBook => userBook.id === book.id)) {
+    if (book && user && user.books.some(userBook => userBook.id === book.id)) {
+      console.log("owned")
       setisOwned(true);
     } else {
       setisOwned(false);
@@ -40,7 +43,31 @@ function BookPage() {
     />
   ));
 
-  function handleOrder() {}
+  function handleOrder() {
+    fetch('/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        book_id: book.id,
+      }),
+    }).then(r => {
+      if (r.ok) {
+        r.json().then(createOrder);
+        setOrderErrors([]);
+      } else {
+        r.json().then(r => setOrderErrors(r.errors));
+      }
+    });
+  }
+
+  function createOrder(newOrder) {
+    const updatedOrders = [...user.orders, newOrder];
+    const updatedBooks = [...user.books, book];
+    const updatedUser = { ...user, orders: updatedOrders, books: updatedBooks };
+    dispatch(login(updatedUser));
+  }
 
   function handleAddReview() {
     if (!user) {
@@ -165,8 +192,9 @@ function BookPage() {
           <h3>Published in {book.published_year}</h3>
           <h4>Genre: {book.genre}</h4>
           <p className='description'>{book.description}</p>
-          {isOwned ? <button className='ui disabled button'>Already Owned</button> : <></>}
-          {user && !isOwned ? (
+          {isOwned ? (
+            <button className='ui disabled button'>Already Owned</button>
+          ) : user ? (
             <button className='ui button' onClick={handleOrder}>
               Order Book
             </button>
@@ -180,6 +208,9 @@ function BookPage() {
               <div className='hidden content'>Sign in</div>
             </div>
           )}
+          {orderErrors.map(error => (
+            <p>{error}</p>
+          ))}
         </div>
       </div>
       <div className='ui vertical divider'></div>
