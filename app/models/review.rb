@@ -8,4 +8,8 @@ class Review < ApplicationRecord
   def username
     self.user.username
   end
+
+  def book_title
+    self.book.title
+  end
 end
