@@ -9,6 +9,7 @@ import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignupForm';
 import BookList from './BookList';
+import BookPage from './BookPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path='/signup'>
           <SignUpForm />
+        </Route>
+        <Route path='/books/:id'>
+          <BookPage />
         </Route>
         <Route exact path='/'>
           <BookList />
