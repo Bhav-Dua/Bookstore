@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBooks } from '../features/books/booksSlice';
 
-function Review({ id, content, rating, username, userId }) {
+function Review({ id, content, rating, username, userId, bookId }) {
   const user = useSelector(state => state.user.data);
+  const inventory = useSelector(state => state.books.inventory);
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
@@ -34,6 +35,7 @@ function Review({ id, content, rating, username, userId }) {
     }).then(r => {
       if (r.ok) {
         r.json().then(saveUpdatedReview);
+        setIsEditing(false);
       } else {
         r.json().then(r => setErrors(r.errors));
       }
@@ -41,7 +43,7 @@ function Review({ id, content, rating, username, userId }) {
   }
 
   function saveUpdatedReview(updatedReview) {
-    const updatedBooks = useSelector(state => state.books.inventory).map(
+    const updatedBooks = inventory.map(
       book => {
         if (book.id === updatedReview.book_id) {
           const updatedReviews = book.reviews.map(review => {
@@ -63,19 +65,19 @@ function Review({ id, content, rating, username, userId }) {
       method: 'DELETE',
     }).then(r => {
       if (r.ok) {
-        r.json().then(deleteReview);
+        deleteReview();
       } else {
         r.json().then(r => setErrors(r.errors));
       }
     });
   }
 
-  function deleteReview(deletedReview) {
-    const updatedBooks = useSelector(state => state.books.inventory).map(
+  function deleteReview() {
+    const updatedBooks = inventory.map(
       book => {
-        if (book.id === deletedReview.book_id) {
+        if (book.id === bookId) {
           const updatedReviews = book.reviews.filter(
-            review => review.id !== deletedReview.id
+            review => review.id !== id
           );
           return { ...book, reviews: updatedReviews };
         }

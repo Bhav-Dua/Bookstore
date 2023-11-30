@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useDispatch, useSelector } from 'react-redux';
 import Review from './Review';
@@ -9,6 +9,7 @@ function BookPage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.data);
+  const inventory = useSelector(state => state.books.inventory);
   const book = useSelector(state => state.books.inventory).find(
     book => book.id === parseInt(id, 10)
   );
@@ -18,8 +19,6 @@ function BookPage() {
   const [reviewRating, setReviewRating] = useState(0);
   const [errors, setErrors] = useState([]);
 
-  if (!book) return <p>No Book to be found</p>
-
   useEffect(() => {
     if (user && user.books.some(userBook => userBook.id === book.id)) {
       setisOwned(true);
@@ -28,6 +27,8 @@ function BookPage() {
     }
   }, [user, book]);
 
+  if (!book) return <p>No Book to be found</p>;
+
   const reviews = book.reviews.map(review => (
     <Review
       id={review.id}
@@ -35,8 +36,11 @@ function BookPage() {
       rating={review.rating}
       username={review.username}
       userId={review.user_id}
+      bookId={review.book_id}
     />
   ));
+
+  function handleOrder() {}
 
   function handleAddReview() {
     if (!user) {
@@ -69,9 +73,10 @@ function BookPage() {
   }
 
   function addReview(newReview) {
-    const updatedBooks = useSelector(state => state.books.inventory).map(book => {
+    const updatedBooks = inventory.map(book => {
       if (book.id === newReview.book_id) {
-        book.reviews = [...book.reviews, newReview];
+        const updatedReviews = [...book.reviews, newReview];
+        return { ...book, reviews: updatedReviews };
       }
       return book;
     });
@@ -84,7 +89,6 @@ function BookPage() {
     setReviewContent('');
     setReviewRating(0);
   }
-
 
   return (
     <div className='ui placeholder segment'>
@@ -157,11 +161,7 @@ function BookPage() {
           <h3>Published in {book.published_year}</h3>
           <h4>Genre: {book.genre}</h4>
           <p className='description'>{book.description}</p>
-          {isOwned ? (
-            <button className='ui disabled button'>Already Owned</button>
-          ) : (
-          <></>
-          )}
+          {isOwned ? <button className='ui disabled button'>Already Owned</button> : <></>}
           {user && !isOwned ? (
             <button className='ui button' onClick={handleOrder}>
               Order Book
