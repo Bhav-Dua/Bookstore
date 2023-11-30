@@ -157,7 +157,7 @@ function BookPage() {
           <div className='meta'>ISBN: {book.isbn}</div>
           <img src={book.img} alt={book.title} />
           <h1>{book.title}</h1>
-          <h2>By: {book.author}</h2>
+          <h3>By: {book.author}</h3>
           <h3>Published in {book.published_year}</h3>
           <h4>Genre: {book.genre}</h4>
           <p className='description'>{book.description}</p>
