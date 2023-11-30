@@ -17,6 +17,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.title = 'BookStore';
+  })
+
+  useEffect(() => {
     fetch('/me').then(r => {
       if (r.ok) {
         r.json().then(r => dispatch(login(r)));
