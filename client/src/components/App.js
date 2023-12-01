@@ -13,6 +13,7 @@ import BookPage from './BookPage';
 import MyBooks from './MyBooks';
 import MyReviews from './MyReviews';
 import BookForm from './BookForm';
+import HomePage from './HomePage';
 
 function App() {
   const dispatch = useDispatch();
@@ -57,8 +58,11 @@ function App() {
         <Route path='/myReviews'>
           <MyReviews />
         </Route>
-        <Route exact path='/'>
+        <Route path='/books'>
           <BookList />
+        </Route>
+        <Route exact path='/'>
+          <HomePage />
         </Route>
       </Switch>
     </div>

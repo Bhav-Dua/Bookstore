@@ -9,6 +9,7 @@ function NavBar() {
   const history = useHistory();
 
   return (
+    <div>
     <div className='Navbar'>
       <h1 className='Nav-logo'>
         <Link to='/'>Books</Link>
@@ -32,7 +33,8 @@ function NavBar() {
           </button>
         </div>
       )}
-      <div className='nav-links'>
+      </div>
+      <div className='nav-links' style={{ marginTop: '1vh'}}>
         {user ? (
           <div className='ui buttons' style={{ marginBottom: '3rem' }}>
             <button className='ui button' onClick={() => history.push('/books')}>

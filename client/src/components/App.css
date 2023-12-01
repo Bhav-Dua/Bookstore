@@ -166,5 +166,10 @@ input {
 
 .homepage h3 {
   font-size: 1.2rem;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.popular-card-container {
+  display: flex;
+  justify-content: center;
 }

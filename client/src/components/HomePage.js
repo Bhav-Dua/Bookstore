@@ -1,3 +1,7 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import BookCard from './BookCard';
+
 function HomePage() {
   const books = useSelector(state => state.books.inventory);
   const mostPopularBook = books.reduce((prevBook, currentBook) => {
@@ -8,12 +12,14 @@ function HomePage() {
 
   if (mostPopularBook) {
     mostPopularBookCard = (
-      <BookCard
-        id={mostPopularBook.id}
-        title={mostPopularBook.title}
-        author={mostPopularBook.author}
-        img={mostPopularBook.img}
-      />
+      <div className='popular-card-container'>
+        <BookCard
+          id={mostPopularBook.id}
+          title={mostPopularBook.title}
+          author={mostPopularBook.author}
+          img={mostPopularBook.img}
+        />
+      </div>
     );
   } else {
     mostPopularBookCard = (
