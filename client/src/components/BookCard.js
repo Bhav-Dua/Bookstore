@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import fallbackBookImg from './fallbackBookImg.jpg';
 
 function BookCard({ id, title, author, img }) {
+  const [imageSrc, setImageSrc] = useState(img);
+
+  function handleImageError() {
+    if (imageSrc !== fallbackBookImg) {
+      setImageSrc(fallbackBookImg);
+    }
+  }
+
   return (
     <div key={id} className='ui card'>
       <div className='image'>
-        <a className='image' href={`/books/${id}`}>
-          <img src={img} alt={title} style={{ maxWidth: '100%', height: 'auto' }} />
+        <a href={`/books/${id}`}>
+          <img
+            src={imageSrc}
+            onError={handleImageError} 
+            alt={title}
+            style={{ maxWidth: '100%', height: 'auto' }}
+          />
         </a>
       </div>
       <div className='content'>

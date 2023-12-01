@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Review from './Review';
 import { setBooks } from '../features/books/booksSlice';
 import { login } from '../features/user/userSlice';
+import fallbackBookImg from './fallbackBookImg.jpg';
 
 function BookPage() {
   const { id } = useParams();
@@ -20,6 +21,7 @@ function BookPage() {
   const [reviewRating, setReviewRating] = useState(0);
   const [errors, setErrors] = useState([]);
   const [orderErrors, setOrderErrors] = useState([]);
+  const [imageSrc, setImageSrc] = useState(book?.img);
 
   useEffect(() => {
     if (book && user && user.books.some(userBook => userBook.id === book.id)) {
@@ -29,6 +31,10 @@ function BookPage() {
       setisOwned(false);
     }
   }, [user, book]);
+
+  useEffect(() => {
+    setImageSrc(book?.img);
+  }, [book]);
 
   if (!book) return <p>No Book to be found</p>;
 
@@ -42,6 +48,12 @@ function BookPage() {
       bookId={review.book_id}
     />
   ));
+
+  function handleImageError() {
+    if (imageSrc !== fallbackBookImg) {
+      setImageSrc(fallbackBookImg);
+    }
+  }
 
   function handleOrder() {
     fetch('/orders', {
@@ -196,7 +208,7 @@ function BookPage() {
         </div>
         <div className='middle aligned column'>
           <div className='meta'>ISBN: {book.isbn}</div>
-          <img src={book.img} alt={book.title} />
+          <img src={imageSrc} onError={handleImageError} alt={book.title} />
           <h1>{book.title}</h1>
           <h3>By: {book.author}</h3>
           <h3>Published in {book.published_year}</h3>
