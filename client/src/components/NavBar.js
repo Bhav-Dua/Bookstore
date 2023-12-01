@@ -32,6 +32,26 @@ function NavBar() {
           </button>
         </div>
       )}
+      <div className='nav-links'>
+        {user ? (
+          <div className='ui buttons' style={{ marginBottom: '3rem' }}>
+            <button className='ui button' onClick={() => history.push('/books')}>
+              Books
+            </button>
+            <button className='ui button' onClick={() => history.push('/newBook')}>
+              Add Book
+            </button>
+            <button className='ui button' onClick={() => history.push('/myBooks')}>
+              My Books
+            </button>
+            <button className='ui button' onClick={() => history.push('/myReviews')}>
+              My Reviews
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }
