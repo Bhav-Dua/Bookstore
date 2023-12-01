@@ -141,8 +141,6 @@ function BookPage() {
                     value={reviewRating}
                     onChange={e => setReviewRating(Number(e.target.value))}
                     style={{ width: '100px' }}
-                    min={1}
-                    max={5}
                   />
                 </div>
                 <div className='ui buttons'>

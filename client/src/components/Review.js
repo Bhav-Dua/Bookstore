@@ -143,9 +143,11 @@ function Review({ id, content, rating, username, userId, bookId }) {
       ) : (
         <></>
       )}
-      {errors.map(error => (
-        <p>{error}</p>
-      ))}
+      <div className='errors' style={{ paddingLeft: '1rem' }}>
+        {errors.map(error => (
+          <p>{error}</p>
+        ))}
+      </div>
     </div>
   );
 }
