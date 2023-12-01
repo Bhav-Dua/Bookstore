@@ -35,24 +35,27 @@ function NavBar() {
         )}
       </div>
       <div className='nav-links' style={{ marginTop: '1vh' }}>
-        {user ? (
-          <div className='ui buttons' style={{ marginBottom: '3rem' }}>
-            <button className='ui button' onClick={() => history.push('/books')}>
-              Books
-            </button>
-            <button className='ui button' onClick={() => history.push('/newBook')}>
-              Add Book
-            </button>
-            <button className='ui button' onClick={() => history.push('/myBooks')}>
-              My Books
-            </button>
-            <button className='ui button' onClick={() => history.push('/myReviews')}>
-              My Reviews
-            </button>
-          </div>
-        ) : (
-          <></>
-        )}
+        <div className='ui buttons' style={{ marginBottom: '3rem' }}>
+          <button className='ui button' onClick={() => history.push('/books')}>
+            Books
+          </button>
+
+          {user ? (
+            <>
+              <button className='ui button' onClick={() => history.push('/newBook')}>
+                Add Book
+              </button>
+              <button className='ui button' onClick={() => history.push('/myBooks')}>
+                My Books
+              </button>
+              <button className='ui button' onClick={() => history.push('/myReviews')}>
+                My Reviews
+              </button>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );
