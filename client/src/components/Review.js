@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBooks } from '../features/books/booksSlice';
+import { login } from '../features/user/userSlice';
 
 function Review({ id, content, rating, username, userId, bookId }) {
   const user = useSelector(state => state.user.data);
@@ -55,7 +56,15 @@ function Review({ id, content, rating, username, userId, bookId }) {
       }
       return book;
     });
+    const updatedUserReviews = user.reviews.map(review => {
+      if (review.id === updatedReview.id) {
+        return updatedReview;
+      }
+      return review;
+    });
+    const updatedUser = { ...user, reviews: updatedUserReviews };
     dispatch(setBooks(updatedBooks));
+    dispatch(login(updatedUser));
   }
 
   function handleDelete() {
@@ -78,7 +87,10 @@ function Review({ id, content, rating, username, userId, bookId }) {
       }
       return book;
     });
+    const updatedUserReviews = user.reviews.filter(review => review.id !== id);
+    const updatedUser = { ...user, reviews: updatedUserReviews };
     dispatch(setBooks(updatedBooks));
+    dispatch(login(updatedUser));
   }
 
   return (

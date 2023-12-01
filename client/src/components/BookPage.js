@@ -109,7 +109,10 @@ function BookPage() {
       }
       return book;
     });
+    const updatedUserReviews = [...user.reviews, newReview];
+    const updatedUser = { ...user, reviews: updatedUserReviews };
     dispatch(setBooks(updatedBooks));
+    dispatch(login(updatedUser));
   }
 
   function handleCancelAdd() {
@@ -201,12 +204,14 @@ function BookPage() {
           <h3>Published in {book.published_year}</h3>
           <h4>Genre: {book.genre}</h4>
           <p className='description'>{book.description}</p>
-          <div style={{
-                    position: 'fixed',
-                    bottom: '1rem',
-                    right: '44vh',
-                    zIndex: '9999',
-                  }}>
+          <div
+            style={{
+              position: 'fixed',
+              bottom: '1rem',
+              right: '44vh',
+              zIndex: '9999',
+            }}
+          >
             {isOwned ? (
               <button className='ui disabled button'>Already Owned</button>
             ) : user ? (
