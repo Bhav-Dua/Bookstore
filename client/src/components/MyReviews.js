@@ -8,7 +8,7 @@ function MyReviews() {
   if (user && user.reviews && user.reviews.length > 0) {
     reviews = user.reviews.map(review => (
       <div className='item'>
-        <div className='header'>{review.book_title}</div>
+        <h3>{review.book_title}</h3>
         {review.content}
         <div className='rating' style={{ marginTop: '10px' }}>
           Rating: {review.rating}
@@ -19,7 +19,8 @@ function MyReviews() {
   else reviews = <p>You have not posted any reviews</p>
 
   return (
-    <div className='ui very relaxed list' style={{ marginTop: '10rem' }}>
+    <div className='my-reviews' style={{ marginTop: '10rem' }}>
+      <h1>My Reviews</h1>
       {reviews}
     </div>
   );
