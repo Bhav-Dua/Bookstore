@@ -16,7 +16,7 @@ function BookCard({ id, title, author, img }) {
         <a href={`/books/${id}`}>
           <img
             src={imageSrc}
-            onError={handleImageError} 
+            onError={handleImageError}
             alt={title}
             style={{ maxWidth: '100%', height: 'auto' }}
           />

@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     document.title = 'BookStore';
-  })
+  });
 
   useEffect(() => {
     fetch('/me').then(r => {

@@ -19,9 +19,7 @@ function BookList() {
 
   return (
     <div className='BookList' style={{ marginTop: '3vh' }}>
-      <div className='ui cards'>
-        {bookCards}
-      </div>
+      <div className='ui cards'>{bookCards}</div>
     </div>
   );
 }

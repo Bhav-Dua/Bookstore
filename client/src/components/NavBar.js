@@ -10,31 +10,31 @@ function NavBar() {
 
   return (
     <div>
-    <div className='Navbar'>
-      <h1 className='Nav-logo'>
-        <Link to='/'>Books</Link>
-      </h1>
-      {user ? (
-        <div className='User-action'>
-          <p>Hello {user.username}</p>
-          <LogoutButton />
-        </div>
-      ) : (
-        <div className='User-action'>
-          <button className='ui button' onClick={() => history.push('/login')}>
-            Login
-          </button>
-          <button
-            className='ui button'
-            onClick={() => history.push('/signup')}
-            style={{ marginLeft: '10px' }}
-          >
-            Create Account
-          </button>
-        </div>
-      )}
+      <div className='Navbar'>
+        <h1 className='Nav-logo'>
+          <Link to='/'>Books</Link>
+        </h1>
+        {user ? (
+          <div className='User-action'>
+            <p>Hello {user.username}</p>
+            <LogoutButton />
+          </div>
+        ) : (
+          <div className='User-action'>
+            <button className='ui button' onClick={() => history.push('/login')}>
+              Login
+            </button>
+            <button
+              className='ui button'
+              onClick={() => history.push('/signup')}
+              style={{ marginLeft: '10px' }}
+            >
+              Create Account
+            </button>
+          </div>
+        )}
       </div>
-      <div className='nav-links' style={{ marginTop: '1vh'}}>
+      <div className='nav-links' style={{ marginTop: '1vh' }}>
         {user ? (
           <div className='ui buttons' style={{ marginBottom: '3rem' }}>
             <button className='ui button' onClick={() => history.push('/books')}>

@@ -15,8 +15,7 @@ function MyReviews() {
         </div>
       </div>
     ));
-  }
-  else reviews = <p>You have not posted any reviews</p>
+  } else reviews = <p>You have not posted any reviews</p>;
 
   return (
     <div className='my-reviews' style={{ marginTop: '10rem' }}>
